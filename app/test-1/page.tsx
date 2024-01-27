@@ -33,7 +33,7 @@ async function TestClient() {
   const todos = await fetchTodos(supabase);
 
   return (
-    <div>
+    <div className="flex flex-col gap-8 px-20 py-12">
       <div>todos:{JSON.stringify(todos)}</div>
       <div>notes:{JSON.stringify(notes)}</div>
     </div>
