@@ -9,9 +9,16 @@ function AuthButton() {
   return (
     <div>
       {userId ? (
-        <UserButton afterSignOutUrl="/" />
+        <div className="border-2 rounded-full w-[35px] h-[35px]">
+          <UserButton afterSignOutUrl="/" />
+        </div>
       ) : (
-        <Link href="/sign-in">Log In</Link>
+        <Link
+          href="/sign-in"
+          className="border-2 rounded-lg px-4 py-2 font-bold"
+        >
+          Log In
+        </Link>
       )}
     </div>
   );

@@ -9,3 +9,6 @@ Supabase project: Tester
 
 Clerk and Supabase
 https://supabase.com/partners/integrations/clerk
+
+Deploy to production:
+https://clerk.com/docs/deployments/overview

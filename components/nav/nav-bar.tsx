@@ -4,12 +4,11 @@ import Link from "next/link";
 
 function NavBar() {
   return (
-    <div>
-      <div className="flex items-center gap-4">
+    <div className="flex items-center ">
+      <div className="flex items-center gap-4 justify-between w-full">
         <Link href="/">
           <h1 className="text-3xl font-bold">Clerk and Supabase</h1>
         </Link>
-
         <AuthButton />
       </div>
     </div>
