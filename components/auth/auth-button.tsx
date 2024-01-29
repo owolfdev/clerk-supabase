@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 
 function AuthButton() {
   const { userId } = auth();
-  console.log("user id:", userId);
+  // console.log("user id:", userId);
   return (
     <div>
       {userId ? (
