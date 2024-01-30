@@ -8,10 +8,11 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/clerk-react";
 import { createClient } from "@supabase/supabase-js";
 
-function NotesInput() {
+function TodosInput() {
   const [supabaseClerk, setSupabaseClerk] = React.useState<any>(null);
   const router = useRouter();
   const { getToken } = useAuth();
+  const { userId } = useAuth();
 
   React.useEffect(() => {
     const initializeForClerkAuth = async () => {
@@ -28,7 +29,7 @@ function NotesInput() {
           },
         }
       );
-      // console.log("supabase client clerk:", client);
+      //   console.log("supabase client clerk:", client);
       setSupabaseClerk(client);
     };
     initializeForClerkAuth();
@@ -41,22 +42,22 @@ function NotesInput() {
     event.target[0].value = "";
     try {
       const { data, error } = await supabaseClerk
-        .from("notes")
-        .insert([{ title: input }]);
+        .from("todos")
+        .insert([{ todo: input, user_id: userId }]);
       if (error) {
         throw error;
       }
-      console.log("notes:", data);
+      console.log("todos:", data);
       router.refresh();
       return data;
     } catch (error) {
-      console.error("Error fetching notes:", error);
+      console.error("Error fetching todos:", error);
     }
   };
 
   return (
     <div>
-      <div>Notes Input (client component)</div>
+      <div>Todos Input (client component)</div>
       <form onSubmit={handleInputNote}>
         <div>
           <input className="border-2 rounded" type="text" />
@@ -66,4 +67,4 @@ function NotesInput() {
   );
 }
 
-export default NotesInput;
+export default TodosInput;

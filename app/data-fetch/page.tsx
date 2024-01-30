@@ -7,6 +7,7 @@ import { auth } from "@clerk/nextjs/server";
 import { currentUser } from "@clerk/nextjs";
 import RefreshButton from "@/components/refresh-button";
 import NotesInput from "./notes-input";
+import TodosInput from "./todos-input";
 import { FormEvent } from "react";
 
 const NotesPage = async () => {
@@ -92,6 +93,9 @@ const NotesPage = async () => {
           ))}
         </ul>
       </div>
+      {/* form */}
+      <TodosInput />
+      {/* form */}
       ---
       <div>
         <h2 className="text-lg font-bold">User Id (server):</h2>

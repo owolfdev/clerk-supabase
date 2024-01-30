@@ -65,7 +65,7 @@ const NotesPage = () => {
             },
           }
         );
-        console.log("supabase client clerk:", client);
+        // console.log("supabase client clerk:", client);
         setSupabaseClerk(client);
       };
       initializeForClerkAuth();
@@ -87,7 +87,7 @@ const NotesPage = () => {
             },
           }
         );
-        console.log("supabase client clerk:", client);
+        // console.log("supabase client clerk:", client);
         setSupabaseClerk(client);
       };
       initializeForClerkAuth();
