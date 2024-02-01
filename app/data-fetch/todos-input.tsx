@@ -42,7 +42,7 @@ function TodosInput() {
     event.target[0].value = "";
     try {
       const { data, error } = await supabaseClerk
-        .from("todos")
+        .from("todos_clerk")
         .insert([{ todo: input, user_id: userId }]);
       if (error) {
         throw error;

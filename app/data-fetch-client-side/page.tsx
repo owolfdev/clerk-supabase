@@ -106,7 +106,7 @@ const NotesPage = () => {
 
   const fetchNotes = async () => {
     try {
-      const response = await supabase?.from("notes").select("*");
+      const response = await supabase?.from("notes_clerk").select("*");
       if (response?.data) {
         setNotes(response.data as Note[]);
       }
@@ -119,7 +119,7 @@ const NotesPage = () => {
     console.log("fetchTodos!!!!");
     console.log("supabaseClerk!!!:", supabaseClerk);
     try {
-      const response = await supabaseClerk?.from("todos").select();
+      const response = await supabaseClerk?.from("todos_clerk").select();
       console.log("todos, response.data:", response?.data);
 
       if (response?.data) {

@@ -9,6 +9,7 @@ import RefreshButton from "@/components/refresh-button";
 import NotesInput from "./notes-input";
 import TodosInput from "./todos-input";
 import { FormEvent } from "react";
+import NotesAndTodos from "./notes-and-todos";
 
 const NotesPage = async () => {
   //
@@ -17,12 +18,12 @@ const NotesPage = async () => {
   const user = await currentUser();
   // console.log("user", user);
   //
-  const initializeSupabase = async () => {
-    const client = await createSupabaseClient();
-    return client;
-  };
+  // const initializeSupabase = async () => {
+  //   const client = await createSupabaseClient();
+  //   return client;
+  // };
 
-  const supabase = await initializeSupabase();
+  // const supabase = await initializeSupabase();
 
   const initializeSupabaseForClerkAuth = async () => {
     const client = await createSupabaseClientForClerkAuth();
@@ -33,7 +34,9 @@ const NotesPage = async () => {
 
   const fetchNotes = async () => {
     try {
-      const { data, error } = await supabase.from("notes").select("*");
+      const { data, error } = await supabaseClerk
+        .from("notes_clerk")
+        .select("*");
       if (error) {
         throw error;
       }
@@ -49,7 +52,7 @@ const NotesPage = async () => {
 
     try {
       const { data, error } = await supabaseClerk
-        .from("todos")
+        .from("todos_clerk")
         .select()
         .eq("user_id", userId);
 
@@ -72,29 +75,32 @@ const NotesPage = async () => {
     <div className="flex flex-col gap-8">
       {/* <RefreshButton /> */}
       <div>
-        <h2 className="text-lg font-bold">Notes (rls policy anon)</h2>
-        <ul>
+        <NotesAndTodos notes={notes} todos={todos} />
+        {/* <ul>
           {notes?.map((note: any) => (
-            <li key={note.id}>- {`${note.title}`}</li>
+            <li key={note.id}>
+              <input type="checkbox" id={`checkbox-${note.id}`} />
+              <label htmlFor={`checkbox-${note.id}`}> {note.title} </label>
+            </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
       {/* form */}
-      <NotesInput />
       {/* form */}
       ---
       <div className="">
-        <h2 className="text-lg font-bold">Todos (rls policy authenticated)</h2>
         {!user && <div>No Authorization...</div>}
         {!todos && <div>No todos fetched...</div>}
-        <ul>
+        {/* <ul>
           {todos?.map((todo: any) => (
             <li key={todo.id}>- {`${todo.todo}`}</li>
           ))}
         </ul>
+        <div>
+          <TodosInput />
+        </div> */}
       </div>
       {/* form */}
-      <TodosInput />
       {/* form */}
       ---
       <div>

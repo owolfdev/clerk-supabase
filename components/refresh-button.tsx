@@ -24,7 +24,7 @@ function RefreshButton() {
   const handleRefresh = async () => {
     console.log("refresh");
     router.refresh();
-    const data = await supabase?.from("todos").select();
+    const data = await supabase?.from("todos_clerk").select();
     console.log("data", data?.data);
   };
   return (

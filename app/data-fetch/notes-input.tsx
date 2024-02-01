@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import {
-  createSupabaseClient,
-  createSupabaseClientForClerkAuth,
-} from "@/lib/supabase";
+// import {
+//   createSupabaseClient,
+//   createSupabaseClientForClerkAuth,
+// } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/clerk-react";
 import { createClient } from "@supabase/supabase-js";
@@ -13,24 +13,25 @@ function NotesInput() {
   const router = useRouter();
   const { getToken } = useAuth();
 
-  React.useEffect(() => {
-    const initializeForClerkAuth = async () => {
-      const client = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        {
-          global: {
-            headers: {
-              Authorization: `Bearer ${await getToken({
-                template: "supabase",
-              })}`,
-            },
+  const initializeForClerkAuth = async () => {
+    const client = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        global: {
+          headers: {
+            Authorization: `Bearer ${await getToken({
+              template: "supabase",
+            })}`,
           },
-        }
-      );
-      // console.log("supabase client clerk:", client);
-      setSupabaseClerk(client);
-    };
+        },
+      }
+    );
+    // console.log("supabase client clerk:", client);
+    setSupabaseClerk(client);
+  };
+
+  React.useEffect(() => {
     initializeForClerkAuth();
   }, []);
 
@@ -41,7 +42,7 @@ function NotesInput() {
     event.target[0].value = "";
     try {
       const { data, error } = await supabaseClerk
-        .from("notes")
+        .from("notes_clerk")
         .insert([{ title: input }]);
       if (error) {
         throw error;
